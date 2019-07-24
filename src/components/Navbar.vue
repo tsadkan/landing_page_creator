@@ -2,7 +2,8 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" @click="$router.push({ name: 'home' });">
-        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+        <img src="@/assets/logo.png" width="112" height="28">
+        <h1 class="header">Creator</h1>
       </a>
 
       <a role="button" class="navbar-burger burger" aria-label="menu"
@@ -109,6 +110,11 @@ export default {
 };
 </script>
 <style scoped>
+.header {
+  font-weight: 600;
+  color: #51db8f;
+  text-transform: uppercase;
+}
 .menu-icon {
   margin-right: 5px;
 }

@@ -1,9 +1,10 @@
 <template>
   <div>
-    <section class="hero is-info is-fullheight">
+    <section class="hero is-fullheight">
       <div class="hero-body">
         <div class="container has-text-centered">
           <div class="column is-4 is-offset-4">
+            <h1 class="header">Creator</h1>
             <img src="@/assets/logo.png" style="height:60px">
             <p class="subtitle has-text-white">Please login to proceed.</p>
             <div class="box">
@@ -89,3 +90,10 @@ export default {
   },
 };
 </script>
+<style>
+.header {
+  color: #51db8f;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+</style>
