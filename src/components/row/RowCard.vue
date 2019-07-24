@@ -1,9 +1,10 @@
 <template>
   <div class="page-container columns is-multiline">
     <Container @drop="onColumn" orientation="horizontal" group-name='col' style="width:100%">
-        <Draggable v-for="column in columns" :key="column.index">
+        <Draggable v-for="(column, columnIndex) in columns" :key="column.index">
             <ColumnCard  :element="column.element"
-        :columnWidth="column.columnWidth"/>
+        :columnWidth="column.columnWidth" :rowIndex='index'
+        :index="columnIndex" :sectionIndex="sectionIndex"/>
         </Draggable>
     </Container>
   </div>
@@ -18,6 +19,12 @@ export default {
     columns: {
       type: [],
       default: [],
+    },
+    index: {
+      type: Number,
+    },
+    sectionIndex: {
+      type: Number,
     },
   },
   components: {

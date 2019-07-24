@@ -10,20 +10,22 @@
     <div class="container" style="padding:20px">
         <div class="columns">
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createRow('one_column')">
                   <header class="card-content">
                       <p>
-                        <b-icon class="menu-icon" icon="border-vertical"></b-icon>
-                        1 COLUMN
+                        <b-icon class="menu-icon" icon="border-vertical"
+                        ></b-icon>
+                         COLUMN
                       </p>
                   </header>
                 </div>
             </div>
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createRow('two_column')">
                   <header class="card-content">
                       <p>
-                        <b-icon class="menu-icon" icon="border-vertical"></b-icon>
+                        <b-icon class="menu-icon" icon="border-vertical"
+                        ></b-icon>
                         2 COLUMN
                       </p>
                   </header>
@@ -32,43 +34,23 @@
         </div>
         <div class="columns">
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createRow('three_column')">
                   <header class="card-content">
                       <p>
-                        <b-icon class="menu-icon" icon="border-vertical"></b-icon>
+                        <b-icon class="menu-icon" icon="border-vertical"
+                        ></b-icon>
                         3 COLUMN
                       </p>
                   </header>
                 </div>
             </div>
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createRow('four_column')">
                   <header class="card-content">
                       <p>
-                        <b-icon class="menu-icon" icon="border-vertical"></b-icon>
+                        <b-icon class="menu-icon" icon="border-vertical"
+                        ></b-icon>
                         4 COLUMN
-                      </p>
-                  </header>
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column is-half">
-                <div class="card pointer-card">
-                  <header class="card-content">
-                      <p>
-                        <b-icon class="menu-icon" icon="border-vertical"></b-icon>
-                        5 COLUMN
-                      </p>
-                  </header>
-                </div>
-            </div>
-            <div class="column is-half">
-                <div class="card pointer-card">
-                  <header class="card-content">
-                      <p>
-                        <b-icon class="menu-icon" icon="border-vertical"></b-icon>
-                        6 COLUMN
                       </p>
                   </header>
                 </div>
@@ -82,6 +64,11 @@ export default {
   name: 'RowCreate',
   data() {
     return {};
+  },
+  methods: {
+    createRow(type) {
+      this.$emit('value-updated', type);
+    },
   },
 };
 </script>

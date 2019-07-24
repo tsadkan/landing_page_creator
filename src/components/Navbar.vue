@@ -93,18 +93,13 @@
       </div>
     </div>
 
-    <RightModal/>
   </nav>
 </template>
 <script>
 import { AuthService } from '@/services/services.index';
-import RightModal from '@/components/RightModal.vue';
 
 export default {
   name: 'Navbar',
-  components: {
-    RightModal,
-  },
   data() {
     return {
     };

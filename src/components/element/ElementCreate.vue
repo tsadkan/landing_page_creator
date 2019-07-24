@@ -11,7 +11,7 @@
     <div class="container" style="padding:20px">
         <div class="columns">
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createElement('heading')">
                   <header class="card-content">
                       <p>
                         <b-icon class="menu-icon" icon="format-header-1"></b-icon>
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createElement('paragraph')">
                   <header class="card-content">
                       <p>
                         <b-icon class="menu-icon" icon="format-pilcrow"></b-icon>
@@ -33,7 +33,7 @@
         </div>
         <div class="columns">
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createElement('anchor')">
                   <header class="card-content">
                       <p>
                         <b-icon class="menu-icon" icon="link-variant"></b-icon>
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createElement('bullet_list')">
                   <header class="card-content">
                       <p>
                         <b-icon class="menu-icon" icon="format-list-bulleted"></b-icon>
@@ -59,7 +59,7 @@
     <div class="container" style="padding:20px">
         <div class="columns">
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createElement('image')">
                   <header class="card-content">
                       <p>
                         <b-icon class="menu-icon" icon="image"></b-icon>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createElement('audio')">
                   <header class="card-content">
                       <p>
                         <b-icon class="menu-icon" icon="speaker-wireless"></b-icon>
@@ -81,7 +81,7 @@
         </div>
         <div class="columns">
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createElement('video')">
                   <header class="card-content">
                       <p>
                         <b-icon class="menu-icon" icon="video"></b-icon>
@@ -99,6 +99,11 @@ export default {
   name: 'ElementCreate',
   data() {
     return {};
+  },
+  methods: {
+    createElement(type) {
+      this.$emit('value-updated', type);
+    },
   },
 };
 </script>

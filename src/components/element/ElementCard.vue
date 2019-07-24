@@ -1,6 +1,8 @@
 <template>
   <div class="page-container">
-    <AddComponent :title="`Element`" @onAdd="onAddElement()"/>
+    <AddComponent :title="`Element`" @onAdd="onAddElement()"
+    v-if="Object.keys(element).length === 0"/>
+    <div v-html="element.element"></div>
   </div>
 </template>
 <script>
@@ -13,12 +15,18 @@ export default {
   components: {
     AddComponent,
   },
+  props: {
+    element: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {};
   },
   methods: {
     onAddElement() {
-      this.$store.commit('layout/toggleModal', 'ElementCreate');
+      this.$emit('onElementAdd');
     },
   },
 };

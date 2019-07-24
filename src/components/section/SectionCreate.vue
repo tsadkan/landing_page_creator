@@ -10,7 +10,7 @@
     <div class="container" style="padding:20px">
         <div class="columns">
             <div class="column is-half">
-                <div class="card pointer-card">
+                <div class="card pointer-card" @click="createSection('full_width_section')">
                   <header class="card-content">
                       <p>
                         FULL WIDTH
@@ -56,6 +56,11 @@ export default {
   name: 'SectionCreate',
   data() {
     return {};
+  },
+  methods: {
+    createSection(type) {
+      this.$emit('value-updated', type);
+    },
   },
 };
 </script>

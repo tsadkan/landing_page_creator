@@ -2,7 +2,7 @@
   <b-modal :active.sync="isRightModalActive" :width="400" scroll="keep" :can-cancel='true'
   :on-cancel="onCancle">
             <div class="card">
-                <component :is='childComponent'></component>
+                <component :is='childComponent' @value-updated="onUpdate($event)"></component>
             </div>
         </b-modal>
 </template>
@@ -28,6 +28,13 @@ export default {
   methods: {
     onCancle() {
       this.$store.commit('layout/toggleModal', null);
+    },
+    onUpdate(type) {
+      // this.$store.commit('PageStore/setSectionIndex', 0);
+      // this.$store.commit('PageStore/setRowIndex', 0);
+      // this.$store.commit('PageStore/setColumnIndex', 0);
+      this.$store.commit('layout/toggleModal', null);
+      this.$emit('onNewAdd', type);
     },
   },
 };

@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+// eslint-disable-next-line import/no-cycle
+import PageStore from '@/page.store';
+
 const core = {
   namespaced: true,
   state: {
@@ -43,5 +46,6 @@ export default new Vuex.Store({
   modules: {
     core,
     layout,
+    PageStore,
   },
 });
