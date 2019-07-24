@@ -1,20 +1,25 @@
 <template>
   <div class="container" style="padding:30px">
-    <!-- <SectionCard/> -->
-    <!-- <SectionCard/> -->
-    <SectionCard v-for='section in sectionList' :key='section.index' :rows="section.rows"/>
+    <Container @drop="onSectionDrop">
+      <Draggable v-for='(section, index) in sectionList' :key="section.index">
+        <SectionCard :rows="section.rows" :index="index" @onRowDrop="onRowDrop($event)"/>
+      </Draggable>
+    </Container>
   </div>
 </template>
 
 <script>
 // eslint-disable-next-line import/no-cycle
 // import { PageAPI } from '@/api';
+import { Container, Draggable } from 'vue-smooth-dnd';
 import SectionCard from '@/components/section/SectionCard.vue';
 
 export default {
   name: 'UserCreate',
   components: {
     SectionCard,
+    Container,
+    Draggable,
   },
   data() {
     return {
@@ -34,7 +39,7 @@ export default {
                   },
                 },
                 {
-                  index: 0,
+                  index: 1,
                   columnWidth: 4,
                   element: {
                     content: 'Title',
@@ -42,7 +47,7 @@ export default {
                   },
                 },
                 {
-                  index: 0,
+                  index: 2,
                   columnWidth: 4,
                   element: {
                     content: 'Title',
@@ -63,7 +68,7 @@ export default {
                   },
                 },
                 {
-                  index: 0,
+                  index: 1,
                   columnWidth: 4,
                   element: {
                     content: 'Title',
@@ -71,7 +76,7 @@ export default {
                   },
                 },
                 {
-                  index: 0,
+                  index: 2,
                   columnWidth: 4,
                   element: {
                     content: 'Title',
@@ -83,7 +88,7 @@ export default {
           ],
         },
         {
-          index: 0,
+          index: 1,
           rows: [
             {
               index: 0,
@@ -97,7 +102,7 @@ export default {
                   },
                 },
                 {
-                  index: 0,
+                  index: 1,
                   columnWidth: 4,
                   element: {
                     content: 'Title',
@@ -105,7 +110,7 @@ export default {
                   },
                 },
                 {
-                  index: 0,
+                  index: 2,
                   columnWidth: 4,
                   element: {
                     content: 'Title',
@@ -114,11 +119,6 @@ export default {
                 },
               ],
             },
-          ],
-        },
-        {
-          index: 0,
-          rows: [
             {
               index: 0,
               columns: [
@@ -131,7 +131,7 @@ export default {
                   },
                 },
                 {
-                  index: 0,
+                  index: 1,
                   columnWidth: 4,
                   element: {
                     content: 'Title',
@@ -139,7 +139,7 @@ export default {
                   },
                 },
                 {
-                  index: 0,
+                  index: 2,
                   columnWidth: 4,
                   element: {
                     content: 'Title',
@@ -150,115 +150,39 @@ export default {
             },
           ],
         },
-        {
-          index: 0,
-          rows: [
-            {
-              index: 0,
-              columns: [
-                {
-                  index: 0,
-                  columnWidth: 4,
-                  element: {
-                    content: 'Title',
-                    type: 'Heading',
-                  },
-                },
-                {
-                  index: 0,
-                  columnWidth: 4,
-                  element: {
-                    content: 'Title',
-                    type: 'Heading',
-                  },
-                },
-                {
-                  index: 0,
-                  columnWidth: 4,
-                  element: {
-                    content: 'Title',
-                    type: 'Heading',
-                  },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          index: 0,
-          rows: [
-            {
-              index: 0,
-              columns: [
-                {
-                  index: 0,
-                  columnWidth: 4,
-                  element: {
-                    content: 'Title',
-                    type: 'Heading',
-                  },
-                },
-                {
-                  index: 0,
-                  columnWidth: 4,
-                  element: {
-                    content: 'Title',
-                    type: 'Heading',
-                  },
-                },
-                {
-                  index: 0,
-                  columnWidth: 4,
-                  element: {
-                    content: 'Title',
-                    type: 'Heading',
-                  },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          index: 0,
-          rows: [
-            {
-              index: 0,
-              columns: [
-                {
-                  index: 0,
-                  columnWidth: 4,
-                  element: {
-                    content: 'Title',
-                    type: 'Heading',
-                  },
-                },
-                {
-                  index: 0,
-                  columnWidth: 4,
-                  element: {
-                    content: 'Title',
-                    type: 'Heading',
-                  },
-                },
-                {
-                  index: 0,
-                  columnWidth: 4,
-                  element: {
-                    content: 'Title',
-                    type: 'Heading',
-                  },
-                },
-              ],
-            },
-          ],
-        },
-
       ],
     };
   },
   created() {
   },
   methods: {
+    // eslint-disable-next-line consistent-return
+    onSectionDrop(dropResult) {
+      const { removedIndex, addedIndex, payload } = dropResult;
+      if (removedIndex === null && addedIndex === null) return this.sectionList;
+
+      const result = [...this.sectionList];
+      let itemToAdd = payload;
+
+      if (removedIndex !== null) {
+        // eslint-disable-next-line prefer-destructuring
+        itemToAdd = result.splice(removedIndex, 1)[0];
+      }
+
+      if (addedIndex !== null) {
+        result.splice(addedIndex, 0, itemToAdd);
+      }
+
+      this.sectionList = result;
+    },
+    onRowDrop(dropResult) {
+      const {
+        index, removedIndex, addedIndex, payload,
+      } = dropResult;
+      console.log({
+        index, removedIndex, addedIndex, payload,
+      });
+    },
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container column" :class="`is-${column-width}`">
+  <div class="page-container column" :class="`is-${columnWidth}`" style="width: 100%">
     Column Card
     <ElementCard/>
   </div>
