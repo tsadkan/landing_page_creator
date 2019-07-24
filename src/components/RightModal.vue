@@ -1,12 +1,13 @@
 <template>
-  <b-modal :active.sync="isModalActive" :width="400" scroll="keep">
+  <b-modal :active.sync="isRightModalActive" :width="400" scroll="keep" :can-cancel='true'
+  :on-cancel="onCancle">
             <div class="card">
                 <component :is='childComponent'></component>
             </div>
         </b-modal>
 </template>
 <script>
-
+import { mapState } from 'vuex';
 import SectionCreate from '@/components/section/SectionCreate.vue';
 import RowCreate from '@/components/row/RowCreate.vue';
 import ElementCreate from '@/components/element/ElementCreate.vue';
@@ -18,18 +19,16 @@ export default {
     RowCreate,
     ElementCreate,
   },
-  props: {
-    isModalActive: {
-      type: Boolean,
-      default: false,
-    },
-    childComponent: {
-      type: String,
-      default: null,
-    },
+  computed: {
+    ...mapState('layout', ['isRightModalActive', 'childComponent']),
   },
   data() {
     return {};
+  },
+  methods: {
+    onCancle() {
+      this.$store.commit('layout/toggleModal', null);
+    },
   },
 };
 </script>

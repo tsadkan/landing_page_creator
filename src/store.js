@@ -21,10 +21,27 @@ const core = {
   },
 };
 
+const layout = {
+  namespaced: true,
+  state: {
+    isRightModalActive: false,
+    childComponent: null,
+  },
+  getters: {},
+  mutations: {
+    toggleModal(state, childComponent) {
+      // eslint-disable-next-line
+      state.isRightModalActive = !state.isRightModalActive;
+      state.childComponent = childComponent;
+    },
+  },
+};
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     core,
+    layout,
   },
 });

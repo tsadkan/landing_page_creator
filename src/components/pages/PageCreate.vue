@@ -1,6 +1,7 @@
 <template>
   <div class="container" style="padding:30px">
-    <Container @drop="onSectionDrop">
+    <AddComponent :title="`Section`" @onAdd="onAddSection()"/>
+    <Container @drop="onSectionDrop" v-if="sectionList.length > 0">
       <Draggable v-for='(section, index) in sectionList' :key="section.index">
         <SectionCard :rows="section.rows" :index="index" @onRowDrop="onRowDrop($event)"/>
       </Draggable>
@@ -13,11 +14,13 @@
 // import { PageAPI } from '@/api';
 import { Container, Draggable } from 'vue-smooth-dnd';
 import SectionCard from '@/components/section/SectionCard.vue';
+import AddComponent from '@/components/AddComponent.vue';
 
 export default {
   name: 'UserCreate',
   components: {
     SectionCard,
+    AddComponent,
     Container,
     Draggable,
   },
@@ -156,6 +159,9 @@ export default {
   created() {
   },
   methods: {
+    onAddSection() {
+      this.$store.commit('layout/toggleModal', 'SectionCreate');
+    },
     // eslint-disable-next-line consistent-return
     onSectionDrop(dropResult) {
       const { removedIndex, addedIndex, payload } = dropResult;

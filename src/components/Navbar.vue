@@ -93,7 +93,7 @@
       </div>
     </div>
 
-    <RightModal :isModalActive='isRightModalActive' :childComponent='currentComponent'/>
+    <RightModal/>
   </nav>
 </template>
 <script>
@@ -107,8 +107,6 @@ export default {
   },
   data() {
     return {
-      isRightModalActive: false,
-      currentComponent: null,
     };
   },
   methods: {
@@ -116,8 +114,7 @@ export default {
       AuthService.logout();
     },
     openRightModal(component) {
-      this.isRightModalActive = true;
-      this.currentComponent = component;
+      this.$store.commit('layout/toggleModal', component);
     },
   },
 };

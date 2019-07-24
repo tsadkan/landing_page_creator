@@ -1,5 +1,6 @@
 <template>
   <div class="page-container">
+    <AddComponent :title="`Row`" @onAdd="onAddRow()"/>
     <Container @drop="onRowDrop" group-name="row">
       <Draggable v-for="row in rows" :key="row.index">
         <RowCard :columns="row.columns"/>
@@ -10,11 +11,12 @@
 <script>
 import { Container, Draggable } from 'vue-smooth-dnd';
 import RowCard from '@/components/row/RowCard.vue';
+import AddComponent from '@/components/AddComponent.vue';
 
 export default {
   name: 'SectionCard',
   components: {
-    RowCard, Container, Draggable,
+    RowCard, AddComponent, Container, Draggable,
   },
   props: {
     rows: {
@@ -29,6 +31,9 @@ export default {
     return {};
   },
   methods: {
+    onAddRow() {
+      this.$store.commit('layout/toggleModal', 'RowCreate');
+    },
     onRowDrop(dropResult) {
       this.$emit('onRowDrop', { index: this.index, ...dropResult });
     },
