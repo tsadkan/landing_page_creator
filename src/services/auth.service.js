@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { UserAccountAPI } from '@/api';
 // eslint-disable-next-line import/no-cycle
 import Router from '../router';

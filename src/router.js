@@ -30,8 +30,8 @@ const router = new Router({
           component: PageList,
         },
         {
-          path: 'page-create',
-          name: 'page-create',
+          path: 'new-page',
+          name: 'new-page',
           component: PageCreate,
         },
       ],

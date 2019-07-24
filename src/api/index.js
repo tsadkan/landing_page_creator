@@ -3,7 +3,7 @@ import UserAccountAPI from './user-account.api';
 // eslint-disable-next-line import/no-cycle
 import PageAPI from './page.api';
 
-const API_ROOT = process.env.VUE_APP_API_ROOT || window.location.origin;
+const API_ROOT = 'http://localhost:3000/api';
 // eslint-disable-next-line
 export { 
   API_ROOT,
