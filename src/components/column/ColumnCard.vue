@@ -1,5 +1,8 @@
 <template>
-  <div class="page-container column" :class="`is-${columnWidth}`" style="width: 100%">
+  <div class="page-container column"  style="width: 100%"
+  @mouseover="hover = true"
+    @mouseleave="hover = false"
+    :class="[hover ? 'mouse-in-column' : '',`is-${columnWidth}`]">
     <ElementCard :rowIndex="rowIndex" :columnIndex="index" :element='element'
     @onElementAdd="onElementAdd()"/>
   </div>
@@ -31,7 +34,9 @@ export default {
     ElementCard,
   },
   data() {
-    return {};
+    return {
+      hover: false,
+    };
   },
   methods: {
     onElementAdd() {
@@ -45,3 +50,10 @@ export default {
   },
 };
 </script>
+<style>
+.mouse-in-column {
+    border: 1px solid rgba(78, 221, 160, 0.1);
+    background: rgba(78, 221, 160, 0.1);
+    cursor:pointer;
+}
+</style>

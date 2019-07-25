@@ -67,12 +67,14 @@ const PageStore = {
         ],
       };
       const result = [...state.sectionList];
-      result.splice(state.index, 0, emptySection);
+      const sectionIndex = state.sectionIndex === 0 ? state.sectionIndex : state.sectionIndex + 1;
+      result.splice(sectionIndex, 0, emptySection);
       state.sectionList = result;
     },
     deleteSection(state) {
       const result = [...state.sectionList];
-      result.splice(state.index, 1);
+      console.log(state.sectionIndex);
+      result.splice(state.sectionIndex, 1);
       state.sectionList = result;
     },
     addRow(state, column) {
@@ -95,6 +97,7 @@ const PageStore = {
         columns,
       };
 
+      console.log(state.rowIndex);
       section.rows.splice(state.rowIndex, 0, emptyRow);
     },
     addHeading(state, content) {
