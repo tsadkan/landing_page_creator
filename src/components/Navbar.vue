@@ -73,7 +73,7 @@
         <div class="navbar-item">
           <div class="buttons">
             <b-button size="is-medium"
-                @click="save()"
+                @click="isPageFormActive = true"
                 type="is-primary"
                 icon-left="content-save">
                 save
@@ -93,15 +93,22 @@
       </div>
     </div>
 
+    <PageForm :isPageFormActive='isPageFormActive' @onCancle='onModalCancle'/>
+
   </nav>
 </template>
 <script>
 import { AuthService } from '@/services/services.index';
+import PageForm from '@/components/pages/PageForm.vue';
 
 export default {
   name: 'Navbar',
+  components: {
+    PageForm,
+  },
   data() {
     return {
+      isPageFormActive: false,
     };
   },
   methods: {
@@ -111,8 +118,8 @@ export default {
     openRightModal(component) {
       this.$store.commit('layout/toggleModal', component);
     },
-    save() {
-      // TODO save the page to loggedin user
+    onModalCancle() {
+      this.isPageFormActive = false;
     },
   },
 };

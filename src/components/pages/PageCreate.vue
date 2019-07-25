@@ -79,7 +79,6 @@ export default {
       this.$store.commit('PageStore/addImage', content);
     },
     addAudio(content) {
-      console.log('SAdasa');
       this.$store.commit('PageStore/addAudio', content);
     },
     addVideo(content) {

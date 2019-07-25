@@ -172,9 +172,9 @@ const PageStore = {
       const el = {
         type: 'audio',
         element: `
-        <video controls>
+        <Audio controls>
           <source src="${src}">
-        </video>
+        </Audio>
       `,
       };
 

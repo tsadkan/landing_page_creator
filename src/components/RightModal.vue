@@ -1,5 +1,6 @@
 <template>
-  <b-modal :active.sync="isRightModalActive" :width="400" scroll="keep" :can-cancel='true'
+  <div class="right-modal">
+    <b-modal :active.sync="isRightModalActive" :width="400" scroll="keep" :can-cancel='true'
   :on-cancel="onCancle">
             <div class="card">
                 <component :is='childComponent' @value-updated="onUpdate($event)"
@@ -7,6 +8,7 @@
                 :elementName="elementName" :placeholder="placeholder"></component>
             </div>
         </b-modal>
+  </div>
 </template>
 <script>
 import { mapState } from 'vuex';
@@ -59,17 +61,17 @@ export default {
 };
 </script>
 <style>
-.modal-close {
+.right-modal .modal-close {
     right: 420px !important;
     background: #51db8f !important;
     border-radius: 0px !important;
 }
-.modal .animation-content {
+.right-modal .modal .animation-content {
     position: fixed;
     right: 0px;
     height: 100%;
 }
-.card {
+.right-modal .card {
     min-height: 100%;
 }
 </style>

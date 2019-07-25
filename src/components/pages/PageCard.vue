@@ -17,8 +17,8 @@
         </div>
     </div>
     <footer class="card-footer">
-    <a href="#" class="card-footer-item">Edit</a>
-    <a href="#" class="card-footer-item">Delete</a>
+    <a class="card-footer-item">Edit</a>
+    <a class="card-footer-item" @click="$emit('delete')">Delete</a>
   </footer>
   </div>
 </template>

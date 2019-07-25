@@ -27,7 +27,7 @@ const AuthService = {
   },
   getAccessToken: () => localStorage.getItem(ACCESS_TOKEN_KEY),
 
-  getUserId: () => JSON.parse(localStorage.getItem(USER_KEY)),
+  getUserId: () => localStorage.getItem(USER_KEY),
   isAuthenticated: () => {
     const token = localStorage.getItem(ACCESS_TOKEN_KEY);
     return token !== null && token !== 'undefined';

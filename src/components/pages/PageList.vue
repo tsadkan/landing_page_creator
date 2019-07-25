@@ -22,8 +22,14 @@
     <div class="columns is-multiline">
       <div v-for="page in pageList" :key="page.id"
       class="column is-one-third">
-        <PageCard :page='page'/>
+        <PageCard :page='page' @delete="deletePage(page.id)"/>
       </div>
+    </div>
+    <div v-if="pageList.length === 0 && !isLoading" class="columns is-multiline">
+     <h2>No page found</h2>
+    </div>
+    <div v-if="isLoading" class="columns is-centered spinner">
+      <!-- add spinner -->
     </div>
   </div>
 </template>
@@ -48,7 +54,12 @@ export default {
     async loadPages() {
       this.isLoading = true;
       this.pageList = await PageAPI.all();
+      this.pageList = this.pageList.reverse();
       this.isLoading = false;
+    },
+    async deletePage(id) {
+      await PageAPI.remove(id);
+      this.loadPages();
     },
   },
   created() {
