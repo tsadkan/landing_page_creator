@@ -25,7 +25,8 @@
         <PageCard :page='page' @delete="deletePage(page.id)"/>
       </div>
     </div>
-    <div v-if="pageList.length === 0 && !isLoading" class="columns is-multiline">
+    <div v-if="pageList.length === 0 && !isLoading"
+    class="columns is-centered " style="margin-top:100px;font-size:20px">
      <h2>No page found</h2>
     </div>
     <div v-if="isLoading" class="columns is-centered spinner">

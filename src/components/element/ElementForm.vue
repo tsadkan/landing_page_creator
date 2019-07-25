@@ -18,7 +18,7 @@
                 v-model="content"
                 :placeholder="placeholder"
                 name="element"
-                v-validate="'required|element'"
+                v-validate="'required'"
                 data-vv-validate-on="none"
                 ></b-input>
                 <button v-if="type==='bullet list'"
@@ -39,7 +39,7 @@
                 v-model="link"
                 placeholder="add link"
                 name="link"
-                v-validate="'required|link'"
+                v-validate="'required'"
                 data-vv-validate-on="none"
                 ></b-input>
             </b-field>
@@ -77,12 +77,15 @@ export default {
   },
   methods: {
     async add() {
-      this.$emit('onElementAdd', {
-        name: this.type,
-        content: this.content,
-        link: this.link,
-        list: this.list,
-      });
+      const valid = await this.$validator.validateAll();
+      if (valid || this.list.length > 0) {
+        this.$emit('onElementAdd', {
+          name: this.type,
+          content: this.content,
+          link: this.link,
+          list: this.list,
+        });
+      }
     },
     addToList() {
       this.list.push(this.content);

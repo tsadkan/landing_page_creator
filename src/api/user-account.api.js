@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { API_ROOT } from './index';
+// eslint-disable-next-line import/no-cycle
 import Request from './request';
 
 const PATH = '/Users';
@@ -21,6 +22,13 @@ const UserAccountAPI = {
   },
   login(email, password) {
     return Request.post(`${API_ROOT}${PATH}/login`, {
+      email,
+      password,
+    });
+  },
+  create(username, email, password) {
+    return Request.post(`${API_ROOT}${PATH}`, {
+      username,
       email,
       password,
     });

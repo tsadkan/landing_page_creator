@@ -8,7 +8,19 @@
             <img src="@/assets/logo.png" style="height:60px">
             <p class="subtitle has-text-white">Please login to proceed.</p>
             <div class="box">
-              <form @submit.prevent="login" novalidate>
+              <form @submit.prevent="signUp" novalidate>
+                <b-field
+                  :type="{'is-danger': errors.has('username')}"
+                  :message="errors.first('username')"
+                >
+                  <b-input
+                    v-model="user.username"
+                    placeholder="User name"
+                    name="username"
+                    v-validate="'required'"
+                    data-vv-validate-on="none"
+                  ></b-input>
+                </b-field>
                 <b-field
                   :type="{'is-danger': errors.has('email')}"
                   :message="errors.first('email')"
@@ -36,9 +48,9 @@
                 </b-field>
                 <button :class="{'is-loading': isLoading }"
                 class="button login-button
-                is-block is-primary is-medium is-fullwidth">Login</button>
-                Do not have account?<a href="#" class="forgot-password"
-                 @click.prevent="$router.push({ name: 'signup' })"> Sign up</a><br>
+                is-block is-primary is-medium is-fullwidth">Sign up</button>
+                Already have account?<a href="#" class="forgot-password"
+                 @click.prevent="$router.push({ name: 'login' })"> Log In</a><br>
               </form>
             </div>
           </div>
@@ -52,7 +64,7 @@
 import { AuthService } from '@/services/services.index';
 
 export default {
-  name: 'Login',
+  name: 'Signup',
   data() {
     return {
       authError: '',
@@ -61,22 +73,15 @@ export default {
     };
   },
   methods: {
-    async login() {
+    async signUp() {
       const valid = await this.$validator.validateAll();
       if (valid) {
         this.isLoading = true;
         try {
-          const success = await AuthService.login(this.user.email, this.user.password);
-          if (success) {
-            this.$validator.reset();
-            this.$router.push({ name: 'home' });
-          } else {
-            this.$notify({
-              title: 'Internal Error',
-              type: 'danger',
-              message: 'Something went wrong on our side.',
-            });
-          }
+          await AuthService.signUp(this.user.username,
+            this.user.email, this.user.password);
+          this.$validator.reset();
+          this.$router.push({ name: 'login' });
           this.isLoading = false;
         } catch (error) {
           this.isLoading = false;

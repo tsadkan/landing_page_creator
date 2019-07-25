@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Login from '@/components/Login.vue';
+import Signup from '@/components/Signup.vue';
 import AuthLayout from '@/components/AuthLayout.vue';
 import NotFoundPage from '@/components/404.vue';
 import PageList from '@/components/pages/PageList.vue';
@@ -42,6 +43,11 @@ const router = new Router({
       component: Login,
     },
     {
+      path: '/signup',
+      name: 'signup',
+      component: Signup,
+    },
+    {
       path: '*',
       name: '404',
       redirect: '/404',
@@ -57,7 +63,7 @@ router.beforeEach((to, from, next) => {
   const authenticated = AuthService.isAuthenticated();
   if (authenticated && to.name === 'login') {
     next({ name: 'home' });
-  } else if (!authenticated && to.name === 'login') {
+  } else if (!authenticated && (to.name === 'login' || to.name === 'signup')) {
     next();
   } else if (!authenticated) {
     next({ name: 'login' });

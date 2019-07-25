@@ -22,6 +22,9 @@ const AuthService = {
     localStorage.removeItem(USER_KEY);
     Router.push({ name: 'login' });
   },
+  async signUp(username, email, password) {
+    await UserAccountAPI.create(username, email, password);
+  },
   updateToken(token) {
     localStorage.setItem(ACCESS_TOKEN_KEY, token);
   },
