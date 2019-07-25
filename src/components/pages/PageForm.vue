@@ -57,7 +57,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('PageStore', ['sectionList']),
+    ...mapGetters('PageStore', ['sectionList', 'featuredImage']),
   },
   methods: {
     async save() {
@@ -67,6 +67,7 @@ export default {
           sectionList: this.sectionList,
           title: this.title,
           description: this.description,
+          featuredImage: this.featuredImage,
         });
         this.isSaving = false;
         this.onCancle();

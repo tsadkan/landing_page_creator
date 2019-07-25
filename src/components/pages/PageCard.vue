@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-image">
         <figure class="image is-3by2">
-        <img src="@/assets/sample.png" alt="Placeholder image">
+        <img :src="page.featuredImage" alt="Placeholder image" style="width: 100%;height: auto;">
         </figure>
     </div>
     <div class="card-content">

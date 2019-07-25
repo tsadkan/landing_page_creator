@@ -1,11 +1,13 @@
 <template>
-  <div class="container" style="padding:30px">
+  <div class="container"  style="padding:30px">
     <AddComponent :title="`Section`" @onAdd="onAddSection()"/>
-    <Container @drop="onSectionDrop" v-if="sectionList.length > 0">
-      <Draggable v-for='(section, index) in sectionList' :key="section.index">
-        <SectionCard :rows="section.rows" :index="index" @onRowDrop="onRowDrop($event)"/>
-      </Draggable>
-    </Container>
+    <div ref="pageRef">
+      <Container @drop="onSectionDrop" v-if="sectionList.length > 0">
+        <Draggable v-for='(section, index) in sectionList' :key="section.index">
+          <SectionCard :rows="section.rows" :index="index" @onRowDrop="onRowDrop($event)"/>
+        </Draggable>
+      </Container>
+    </div>
 
     <RightModal @onNewAdd='onNewAdd($event)'/>
   </div>
@@ -39,9 +41,25 @@ export default {
     if (id) this.$store.dispatch('PageStore/fetchPage', id);
   },
   computed: {
-    ...mapGetters('PageStore', ['sectionList']),
+    ...mapGetters('PageStore', ['sectionList', 'isPageSaving']),
+  },
+  watch: {
+    isPageSaving() {
+      this.capture();
+    },
   },
   methods: {
+    async capture() {
+      const el = this.$refs.pageRef;
+      const options = {
+        type: 'dataURL',
+        allowTaint: true,
+        imageTimeout: 0,
+      };
+
+      const output = await this.$html2canvas(el, options);
+      this.$store.commit('PageStore/setFeaturedImage', output);
+    },
     onAddSection() {
       this.$store.commit('layout/toggleModal', 'SectionCreate');
     },

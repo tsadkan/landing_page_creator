@@ -14,6 +14,8 @@ const PageStore = {
     sectionIndex: 0,
     rowIndex: 0,
     columnIndex: 0,
+    isPageSaving: false,
+    featuredImage: '',
   },
   actions: {
     async fetchPage({ commit }, id) {
@@ -40,6 +42,12 @@ const PageStore = {
     },
     setColumnIndex(state, index) {
       state.columnIndex = index;
+    },
+    togglePageSaving(state) {
+      state.isPageSaving = !state.isPageSaving;
+    },
+    setFeaturedImage(state, image) {
+      state.featuredImage = image;
     },
     // eslint-disable-next-line consistent-return
     onSectionDrop(state, dropResult) {
@@ -73,7 +81,6 @@ const PageStore = {
     },
     deleteSection(state) {
       const result = [...state.sectionList];
-      console.log(state.sectionIndex);
       result.splice(state.sectionIndex, 1);
       state.sectionList = result;
     },
@@ -196,6 +203,8 @@ const PageStore = {
   },
   getters: {
     sectionList: state => state.sectionList,
+    isPageSaving: state => state.isPageSaving,
+    featuredImage: state => state.featuredImage,
   },
 };
 

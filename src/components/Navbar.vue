@@ -73,7 +73,7 @@
         <div class="navbar-item">
           <div class="buttons">
             <b-button size="is-medium"
-                @click="isPageFormActive = true"
+                @click="savePage"
                 type="is-primary"
                 icon-left="content-save">
                 save
@@ -117,6 +117,10 @@ export default {
     },
     openRightModal(component) {
       this.$store.commit('layout/toggleModal', component);
+    },
+    savePage() {
+      this.isPageFormActive = true;
+      this.$store.commit('PageStore/togglePageSaving');
     },
     onModalCancle() {
       this.isPageFormActive = false;
