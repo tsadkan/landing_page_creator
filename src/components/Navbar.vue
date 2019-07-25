@@ -73,7 +73,7 @@
         <div class="navbar-item">
           <div class="buttons">
             <b-button size="is-medium"
-                @click="logout()"
+                @click="save()"
                 type="is-primary"
                 icon-left="content-save">
                 save
@@ -110,6 +110,9 @@ export default {
     },
     openRightModal(component) {
       this.$store.commit('layout/toggleModal', component);
+    },
+    save() {
+      // TODO save the page to loggedin user
     },
   },
 };

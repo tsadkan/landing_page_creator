@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="column is-half">
-                <div class="card pointer-card" @click="createElement('bullet_list')">
+                <div class="card pointer-card" @click="createElement('bullet list')">
                   <header class="card-content">
                       <p>
                         <b-icon class="menu-icon" icon="format-list-bulleted"></b-icon>
@@ -101,8 +101,12 @@ export default {
     return {};
   },
   methods: {
-    createElement(type) {
-      this.$emit('value-updated', type);
+    createElement(name) {
+      this.$emit('value-updated', {
+        name,
+        group: 'element',
+        content: '',
+      });
     },
   },
 };

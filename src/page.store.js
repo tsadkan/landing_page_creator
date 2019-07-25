@@ -150,7 +150,7 @@ const PageStore = {
       }
       const ul = `<ul style="list-style:square">${list.join(' ')}</ul>`;
       const el = {
-        type: 'bullet_list',
+        type: 'bullet list',
         element: ul,
       };
 

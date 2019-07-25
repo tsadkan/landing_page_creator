@@ -37,6 +37,9 @@ const layout = {
       state.isRightModalActive = !state.isRightModalActive;
       state.childComponent = childComponent;
     },
+    setChildComponent(state, component) {
+      state.childComponent = component;
+    },
   },
 };
 

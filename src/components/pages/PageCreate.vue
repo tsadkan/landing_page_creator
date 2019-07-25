@@ -63,30 +63,31 @@ export default {
     addRow(column) {
       this.$store.commit('PageStore/addRow', column);
     },
-    addHeading() {
-      this.$store.commit('PageStore/addHeading', 'Heading');
+    addHeading(content) {
+      this.$store.commit('PageStore/addHeading', content);
     },
-    addParagraph() {
-      this.$store.commit('PageStore/addParagraph', 'Paragraph');
+    addParagraph(content) {
+      this.$store.commit('PageStore/addParagraph', content);
     },
-    addAnchor() {
-      this.$store.commit('PageStore/addAnchor', { link: 'http://google.com', name: 'google' });
+    addAnchor(content, link) {
+      this.$store.commit('PageStore/addAnchor', { link, name: content });
     },
-    addBulletList() {
-      this.$store.commit('PageStore/addBulletList', ['first', 'second', 'third']);
+    addBulletList(list) {
+      this.$store.commit('PageStore/addBulletList', list);
     },
-    addImage() {
-      this.$store.commit('PageStore/addImage', 'https://www.gstatic.com/webp/gallery3/1.png');
+    addImage(content) {
+      this.$store.commit('PageStore/addImage', content);
     },
-    addAudio() {
+    addAudio(content) {
       console.log('SAdasa');
-      this.$store.commit('PageStore/addAudio', 'http://www.largesound.com/ashborytour/sound/brobob.mp3');
+      this.$store.commit('PageStore/addAudio', content);
     },
-    addVideo() {
-      this.$store.commit('PageStore/addVideo', 'http://techslides.com/demos/sample-videos/small.mp4');
+    addVideo(content) {
+      this.$store.commit('PageStore/addVideo', content);
     },
     onNewAdd(type) {
-      switch (type) {
+      const { name, content } = type;
+      switch (name) {
         case 'full_width_section':
           this.addFullWidthSection();
           break;
@@ -109,25 +110,25 @@ export default {
           this.addRow(6);
           break;
         case 'heading':
-          this.addHeading();
+          this.addHeading(content);
           break;
         case 'paragraph':
-          this.addParagraph();
+          this.addParagraph(content);
           break;
         case 'anchor':
-          this.addAnchor();
+          this.addAnchor(content, type.link);
           break;
-        case 'bullet_list':
-          this.addBulletList();
+        case 'bullet list':
+          this.addBulletList(type.list);
           break;
         case 'image':
-          this.addImage();
+          this.addImage(content);
           break;
         case 'audio':
-          this.addAudio();
+          this.addAudio(content);
           break;
         case 'video':
-          this.addVideo();
+          this.addVideo(content);
           break;
 
         default:

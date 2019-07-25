@@ -66,8 +66,11 @@ export default {
     return {};
   },
   methods: {
-    createRow(type) {
-      this.$emit('value-updated', type);
+    createRow(name) {
+      this.$emit('value-updated', {
+        name,
+        content: '',
+      });
     },
   },
 };

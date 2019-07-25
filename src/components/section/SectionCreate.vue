@@ -58,8 +58,11 @@ export default {
     return {};
   },
   methods: {
-    createSection(type) {
-      this.$emit('value-updated', type);
+    createSection(name) {
+      this.$emit('value-updated', {
+        name,
+        content: '',
+      });
     },
   },
 };
